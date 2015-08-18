@@ -1,0 +1,17 @@
+From maletin at mail.berlios.de  Thu Nov 11 17:06:09 2010
+From: maletin at mail.berlios.de (maletin at mail.berlios.de)
+Date: Thu, 11 Nov 2010 17:06:09 +0100
+Subject: [Cpan-teamspeak-svn] r43 - cpan/tags
+Message-ID: <20101111160609.83F85480588@sheep.berlios.de>
+
+Author: maletin
+Date: 2010-11-11 17:06:09 +0100 (Thu, 11 Nov 2010)
+New Revision: 43
+
+Added:
+   cpan/tags/0.6/
+Log:
+Trunk-Revision 41 is tagged as Version 0.6.
+
+
+

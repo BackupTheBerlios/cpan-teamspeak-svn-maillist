@@ -1,0 +1,40 @@
+From maletin at mail.berlios.de  Thu Sep 20 11:29:51 2007
+From: maletin at mail.berlios.de (maletin at BerliOS)
+Date: Thu, 20 Sep 2007 11:29:51 +0200
+Subject: [Cpan-teamspeak-svn] r32 - cpan/tags
+Message-ID: <200709200929.l8K9TpRc019631@sheep.berlios.de>
+
+Author: maletin
+Date: 2007-09-20 11:29:51 +0200 (Thu, 20 Sep 2007)
+New Revision: 32
+
+Added:
+   cpan/tags/0.4/
+Log:
+Trunk-Revision 31 is tagged as Version 0.4.
+
+
+Copied: cpan/tags/0.4 (from rev 31, cpan/trunk)
+
+
+
+From maletin at mail.berlios.de  Fri Sep 21 03:15:23 2007
+From: maletin at mail.berlios.de (maletin at BerliOS)
+Date: Fri, 21 Sep 2007 03:15:23 +0200
+Subject: [Cpan-teamspeak-svn] r34 - cpan/tags
+Message-ID: <200709210115.l8L1FNmV008025@sheep.berlios.de>
+
+Author: maletin
+Date: 2007-09-21 03:15:23 +0200 (Fri, 21 Sep 2007)
+New Revision: 34
+
+Added:
+   cpan/tags/0.5/
+Log:
+Trunk-Revision 33 is tagged as Version 0.5.
+
+
+Copied: cpan/tags/0.5 (from rev 33, cpan/trunk)
+
+
+

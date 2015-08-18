@@ -1,0 +1,342 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Cpan-teamspeak-svn] r37 - in cpan/trunk: . lib lib/Teamspeak	lib/Teamspeak/SQL lib/Teamspeak/Telnet t
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/cpan-teamspeak-svn/2008-March/index.html" >
+   <LINK REL="made" HREF="mailto:cpan-teamspeak-svn%40lists.berlios.de?Subject=Re%3A%20%5BCpan-teamspeak-svn%5D%20r37%20-%20in%20cpan/trunk%3A%20.%20lib%20lib/Teamspeak%0A%09lib/Teamspeak/SQL%20lib/Teamspeak/Telnet%20t&In-Reply-To=%3C200803090110.m291A1Hx001166%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000003.html">
+   <LINK REL="Next"  HREF="000005.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Cpan-teamspeak-svn] r37 - in cpan/trunk: . lib lib/Teamspeak	lib/Teamspeak/SQL lib/Teamspeak/Telnet t</H1>
+    <B>maletin at BerliOS</B> 
+    <A HREF="mailto:cpan-teamspeak-svn%40lists.berlios.de?Subject=Re%3A%20%5BCpan-teamspeak-svn%5D%20r37%20-%20in%20cpan/trunk%3A%20.%20lib%20lib/Teamspeak%0A%09lib/Teamspeak/SQL%20lib/Teamspeak/Telnet%20t&In-Reply-To=%3C200803090110.m291A1Hx001166%40sheep.berlios.de%3E"
+       TITLE="[Cpan-teamspeak-svn] r37 - in cpan/trunk: . lib lib/Teamspeak	lib/Teamspeak/SQL lib/Teamspeak/Telnet t">maletin at mail.berlios.de
+       </A><BR>
+    <I>Sun Mar  9 02:10:01 CET 2008</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000003.html">[Cpan-teamspeak-svn] r36 - cpan/trunk
+</A></li>
+        <LI>Next message: <A HREF="000005.html">[Cpan-teamspeak-svn] r38 - cpan/trunk
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4">[ date ]</a>
+              <a href="thread.html#4">[ thread ]</a>
+              <a href="subject.html#4">[ subject ]</a>
+              <a href="author.html#4">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: maletin
+Date: 2008-03-09 02:10:00 +0100 (Sun, 09 Mar 2008)
+New Revision: 37
+
+Removed:
+   cpan/trunk/t/kwalitee.t
+Modified:
+   cpan/trunk/MANIFEST
+   cpan/trunk/SIGNATURE
+   cpan/trunk/lib/Teamspeak.pm
+   cpan/trunk/lib/Teamspeak/SQL/Channel.pm
+   cpan/trunk/lib/Teamspeak/Telnet/Channel.pm
+   cpan/trunk/lib/Teamspeak/Web.pm
+   cpan/trunk/t/00signature.t
+   cpan/trunk/t/09pod.t
+   cpan/trunk/t/10distribution.t
+Log:
+Using Perl::Critic instead of kwalitee.
+
+
+Modified: cpan/trunk/MANIFEST
+===================================================================
+--- cpan/trunk/MANIFEST	2008-03-08 23:20:08 UTC (rev 36)
++++ cpan/trunk/MANIFEST	2008-03-09 01:10:00 UTC (rev 37)
+@@ -1,4 +1,3 @@
+-SIGNATURE
+ Changes
+ lib/Teamspeak.pm
+ lib/Teamspeak/Ban.pm
+@@ -22,11 +21,11 @@
+ Makefile.PL
+ MANIFEST
+ README
++SIGNATURE
+ t/00signature.t
+ t/01version.t
+ t/09pod.t
+ t/10distribution.t
+-t/kwalitee.t
+ t/mysql/channel.t
+ t/mysql/connect.t
+ t/sqlite/channel.t
+
+Modified: cpan/trunk/SIGNATURE
+===================================================================
+--- cpan/trunk/SIGNATURE	2008-03-08 23:20:08 UTC (rev 36)
++++ cpan/trunk/SIGNATURE	2008-03-09 01:10:00 UTC (rev 37)
+@@ -16,10 +16,10 @@
+ 
+ SHA1 9ceb34120ccfce4d17f07601da4cdb647fa6bba9 Changes
+ SHA1 6ca684af4fef50a7cad03b5921f8aaa4f8245898 LICENSE
+-SHA1 fbe787b93ab54318b0fc01a34a32a30b9ff4c41c MANIFEST
++SHA1 c635c28a657a06aabd4e2b83f807df4dce701856 MANIFEST
+ SHA1 5afb04c19d4932e42a467618d0627cd2cf3e1b46 Makefile.PL
+-SHA1 45eab59c854c811f3c32b883000b1379f5f993cc README
+-SHA1 02de5cd8ecc404df405b6bc9c1f595a11f8c8615 lib/Teamspeak.pm
++SHA1 1ea1a6e7a415d7dc61304e40134acd567cf84971 README
++SHA1 d5faa3097b2449c1307e6f2088eadf95050462ee lib/Teamspeak.pm
+ SHA1 b59f0d05ce04afcba4a5dfbc03be12584aa24455 lib/Teamspeak/Ban.pm
+ SHA1 1ba3ba3b9ded21c22e4b6cc3aeac1d45459071ec lib/Teamspeak/Ban.pod
+ SHA1 fa77a91bf6285d4f48ff25c875439866d3581219 lib/Teamspeak/Channel.pm
+@@ -34,14 +34,13 @@
+ SHA1 efc235669bbfdbc392250490c8e5f2f6391d2af4 lib/Teamspeak/SQL/Channel.pod
+ SHA1 da9eb21273acc42ad25a54e119c6cf99de210635 lib/Teamspeak/Telnet.pm
+ SHA1 1f44a8314b41b96f3904e5e93ade3307f104a842 lib/Teamspeak/Telnet.pod
+-SHA1 64634276474f8373fe400b3f01e078921d7c1759 lib/Teamspeak/Telnet/Channel.pm
++SHA1 6c49513738511c1f39f19ebf9880a7db89cf8b67 lib/Teamspeak/Telnet/Channel.pm
+ SHA1 402b39990bb9824e7bb65f4e0f95dffdb0c9ec4f lib/Teamspeak/Telnet/Channel.pod
+-SHA1 dc08f1fbb3cbdc53bd293f4b6691bbea824b4d64 lib/Teamspeak/Web.pm
++SHA1 a0ab15583f15b7cf9f33cdf3ba3f629c17400a19 lib/Teamspeak/Web.pm
+ SHA1 61a6fbc210e3ac303dbe5d55aa2d60502bb57b07 t/00signature.t
+ SHA1 d597eefd172d65575c6c2b982ef04869acd28fbe t/01version.t
+ SHA1 4d942bb85a8ca266b14961ba8216cd7aeced398f t/09pod.t
+ SHA1 118a1f2c4394460dc1e2e769b865f5fb634fcff4 t/10distribution.t
+-SHA1 8f3c94e5e41107075e51d5edbdcd1e9778d5388f t/kwalitee.t
+ SHA1 3ebdf1808dc1b5a01da591772af244b00fe10516 t/mysql/channel.t
+ SHA1 202c33b87dfce0ca7a1e6f19b746d019e39f1cf5 t/mysql/connect.t
+ SHA1 e467955b33bae10779094d47feb8fdc82f02bb2c t/sqlite/channel.t
+@@ -53,7 +52,7 @@
+ -----BEGIN PGP SIGNATURE-----
+ Version: GnuPG v1.4.6 (GNU/Linux)
+ 
+-iD8DBQFH0x3necMYKYVGps4RAgRjAJ47jtkPHgv7ZpQSPyr6yFhynzLdJQCZAdaL
+-JoFc43ciPB7l8wXZwFtagmE=
+-=FEdZ
++iD8DBQFH0zhLecMYKYVGps4RAia1AJwM+1kFubxPoMibwbJPPTaAcS8ayQCeJtLN
++IgE3l1YQtFyV1ugM3ZSHM10=
++=kssB
+ -----END PGP SIGNATURE-----
+
+
+Property changes on: cpan/trunk/lib/Teamspeak/SQL/Channel.pm
+___________________________________________________________________
+Name: svn:keywords
+   + Id URL
+
+Modified: cpan/trunk/lib/Teamspeak/Telnet/Channel.pm
+===================================================================
+--- cpan/trunk/lib/Teamspeak/Telnet/Channel.pm	2008-03-08 23:20:08 UTC (rev 36)
++++ cpan/trunk/lib/Teamspeak/Telnet/Channel.pm	2008-03-09 01:10:00 UTC (rev 37)
+@@ -75,6 +75,32 @@
+ 
+ 1;
+ 
+-=head A
++__END__
+ 
++=head1 NAME
++
++Teamspeak::Telnet::Channel - Datastructure for a Teamspeak-Channel.
++
++=head2 parameter()
++
++=head2 new()
++
++=head2 id()
++
++=head2 codec()
++
++=head2 parent()
++
++=head2 order()
++
++=head2 maxusers()
++
++=head2 name()
++
++=head2 flags()
++
++=head2 password()
++
++=head2 topic()
++
+ =cut
+
+
+Property changes on: cpan/trunk/lib/Teamspeak/Telnet/Channel.pm
+___________________________________________________________________
+Name: svn:keywords
+   + Id URL
+
+Modified: cpan/trunk/lib/Teamspeak/Web.pm
+===================================================================
+--- cpan/trunk/lib/Teamspeak/Web.pm	2008-03-08 23:20:08 UTC (rev 36)
++++ cpan/trunk/lib/Teamspeak/Web.pm	2008-03-09 01:10:00 UTC (rev 37)
+@@ -46,3 +46,27 @@
+ }    # new
+ 
+ 1;
++
++__END__
++
++=head1 NAME
++
++Teamspeak::Web - The HTTP-Interface to administrate Teamspeak-Server.
++
++=head2 connect
++
++=head2 new
++
++=head1 SEE ALSO
++
++C&lt;Teamspeak&gt;
++
++=head1 AUTHOR
++
++Martin von Oertzen (<A HREF="https://lists.berlios.de/mailman/listinfo/cpan-teamspeak-svn">maletin at cpan.org</A>)
++
++=head1 COPYRIGHT
++
++Copyright (c) 2005-2008, Martin von Oertzen. All Rights Reserved.
++This module is free software. It may be used, redistributed
++and/or modified under the same terms as Perl itself.
+
+Modified: cpan/trunk/lib/Teamspeak.pm
+===================================================================
+--- cpan/trunk/lib/Teamspeak.pm	2008-03-08 23:20:08 UTC (rev 36)
++++ cpan/trunk/lib/Teamspeak.pm	2008-03-09 01:10:00 UTC (rev 37)
+@@ -28,13 +28,14 @@
+         return Teamspeak::Web-&gt;new(%arg);
+     }
+     else {
+-        die(&quot;unknown type $arg{type}&quot;);
++        croak(&quot;unknown type $arg{type}&quot;);
+     }
+ }    # new
+ 
+ sub error {
+-    $_[0]-&gt;{err}    = 1;
+-    $_[0]-&gt;{errstr} = $_[1];
++    my ($self) = @_;
++    $self-&gt;{err}    = 1;
++    $self-&gt;{errstr} = $_[1];
+     return 0;
+ }    # error
+ 
+@@ -74,16 +75,22 @@
+ 
+ Every Connection-Type can only use a part of all available Methods.
+ 
+-=head2 Overview
++=head1 SUBROUTINES/METHODS
+ 
+-=head2 Constructor and initialization
++=head2 new( type =&gt; conn_type, [...] )
+ 
+-=head2 Class and object methods
++conn_type is the connection type and can be telnet, sql or web.
+ 
+-=head1 ENVIRONMENT
++=head2 error( [$parms, ] $msg )
+ 
++Used internally to set the error status and message.
++
++=head1 CONFIGURATION AND ENVIRONMENT
++
+ There are no Environment-Variables used, at the moment.
+ 
++=head1 DEPENDENCIES
++
+ =head1 DIAGNOSTICS
+ 
+ The Project is still Pre-Alpha.
+@@ -94,8 +101,10 @@
+ 
+ =back
+ 
+-=head1 BUGS
++=head1 INCOMPATIBILITIES
+ 
++=head1 BUGS AND LIMITATIONS
++
+ There are undoubtedly serious bugs lurking somewhere in this code, if
+ only because parts of it give the impression of understanding a great deal
+ more about Perl than they really do. 
+@@ -124,8 +133,8 @@
+ 
+ Martin von Oertzen (<A HREF="https://lists.berlios.de/mailman/listinfo/cpan-teamspeak-svn">maletin at cpan.org</A>)
+ 
+-=head1 COPYRIGHT
++=head1 LICENSE AND COPYRIGHT
+ 
+-Copyright (c) 2005-2007, Martin von Oertzen. All Rights Reserved.
++Copyright (c) 2005-2008, Martin von Oertzen. All Rights Reserved.
+ This module is free software. It may be used, redistributed
+ and/or modified under the same terms as Perl itself.
+
+
+Property changes on: cpan/trunk/t/00signature.t
+___________________________________________________________________
+Name: svn:keywords
+   + Id URL
+
+
+Property changes on: cpan/trunk/t/09pod.t
+___________________________________________________________________
+Name: svn:keywords
+   + Id URL
+
+
+Property changes on: cpan/trunk/t/10distribution.t
+___________________________________________________________________
+Name: svn:keywords
+   + Id URL
+
+Deleted: cpan/trunk/t/kwalitee.t
+===================================================================
+--- cpan/trunk/t/kwalitee.t	2008-03-08 23:20:08 UTC (rev 36)
++++ cpan/trunk/t/kwalitee.t	2008-03-09 01:10:00 UTC (rev 37)
+@@ -1,10 +0,0 @@
+-#!/usr/bin/perl -w
+-
+-# $Id$
+-# $URL$
+-
+-use strict;
+-use Test::More;
+-
+-eval { require Test::Kwalitee; Test::Kwalitee-&gt;import() };
+-plan( skip_all =&gt; 'Test::Kwalitee not installed; skipping' ) if $@;
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000003.html">[Cpan-teamspeak-svn] r36 - cpan/trunk
+</A></li>
+	<LI>Next message: <A HREF="000005.html">[Cpan-teamspeak-svn] r38 - cpan/trunk
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4">[ date ]</a>
+              <a href="thread.html#4">[ thread ]</a>
+              <a href="subject.html#4">[ subject ]</a>
+              <a href="author.html#4">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/cpan-teamspeak-svn">More information about the Cpan-teamspeak-svn
+mailing list</a><br>
+</body></html>

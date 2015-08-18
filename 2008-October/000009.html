@@ -1,0 +1,499 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Cpan-teamspeak-svn] r42 - in cpan/trunk: . lib lib/Teamspeak	lib/Teamspeak/SQL lib/Teamspeak/Telnet
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/cpan-teamspeak-svn/2008-October/index.html" >
+   <LINK REL="made" HREF="mailto:cpan-teamspeak-svn%40lists.berlios.de?Subject=Re%3A%20%5BCpan-teamspeak-svn%5D%20r42%20-%20in%20cpan/trunk%3A%20.%20lib%20lib/Teamspeak%0A%09lib/Teamspeak/SQL%20lib/Teamspeak/Telnet&In-Reply-To=%3C200810130053.m9D0rPJJ014330%40sheep.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   
+   
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Cpan-teamspeak-svn] r42 - in cpan/trunk: . lib lib/Teamspeak	lib/Teamspeak/SQL lib/Teamspeak/Telnet</H1>
+    <B>maletin at BerliOS</B> 
+    <A HREF="mailto:cpan-teamspeak-svn%40lists.berlios.de?Subject=Re%3A%20%5BCpan-teamspeak-svn%5D%20r42%20-%20in%20cpan/trunk%3A%20.%20lib%20lib/Teamspeak%0A%09lib/Teamspeak/SQL%20lib/Teamspeak/Telnet&In-Reply-To=%3C200810130053.m9D0rPJJ014330%40sheep.berlios.de%3E"
+       TITLE="[Cpan-teamspeak-svn] r42 - in cpan/trunk: . lib lib/Teamspeak	lib/Teamspeak/SQL lib/Teamspeak/Telnet">maletin at mail.berlios.de
+       </A><BR>
+    <I>Mon Oct 13 02:53:25 CEST 2008</I>
+    <P><UL>
+        
+        
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#9">[ date ]</a>
+              <a href="thread.html#9">[ thread ]</a>
+              <a href="subject.html#9">[ subject ]</a>
+              <a href="author.html#9">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Author: maletin
+Date: 2008-10-13 02:53:23 +0200 (Mon, 13 Oct 2008)
+New Revision: 42
+
+Modified:
+   cpan/trunk/Changes
+   cpan/trunk/META.yml
+   cpan/trunk/README
+   cpan/trunk/lib/Teamspeak.pm
+   cpan/trunk/lib/Teamspeak/Ban.pm
+   cpan/trunk/lib/Teamspeak/Channel.pm
+   cpan/trunk/lib/Teamspeak/Player.pm
+   cpan/trunk/lib/Teamspeak/Privileges.pm
+   cpan/trunk/lib/Teamspeak/SQL.pm
+   cpan/trunk/lib/Teamspeak/SQL/Channel.pm
+   cpan/trunk/lib/Teamspeak/Telnet.pm
+   cpan/trunk/lib/Teamspeak/Telnet/Channel.pm
+   cpan/trunk/lib/Teamspeak/Web.pm
+Log:
+Version 0.7.
+login may fail.
+
+
+Modified: cpan/trunk/Changes
+===================================================================
+--- cpan/trunk/Changes	2008-07-17 15:06:15 UTC (rev 41)
++++ cpan/trunk/Changes	2008-10-13 00:53:23 UTC (rev 42)
+@@ -1,6 +1,9 @@
+ $Id$
+ $URL$
+ 
++0.7 2008-07-19
++  Using Config::IniFiles and Log::Log4perl now.
++
+ 0.6 2007-10-22
+   tests corrected.
+ 
+
+Modified: cpan/trunk/META.yml
+===================================================================
+--- cpan/trunk/META.yml	2008-07-17 15:06:15 UTC (rev 41)
++++ cpan/trunk/META.yml	2008-10-13 00:53:23 UTC (rev 42)
+@@ -1,6 +1,6 @@
+ --- #YAML:1.0
+ name:                Teamspeak
+-version:             0.6
++version:             0.7
+ abstract:            Interface to administrate Teamspeak-Server.
+ license:             ~
+ author:              
+
+Modified: cpan/trunk/README
+===================================================================
+--- cpan/trunk/README	2008-07-17 15:06:15 UTC (rev 41)
++++ cpan/trunk/README	2008-10-13 00:53:23 UTC (rev 42)
+@@ -1,5 +1,5 @@
+ ==============================================================================
+-                 Release of version 0.6 of Teamspeak
++                 Release of version 0.7 of Teamspeak
+ ==============================================================================
+ 
+ 
+@@ -41,7 +41,7 @@
+ 
+ CHANGES AND FUTURE DEVELOPMENT
+ 
+-    This readme refers to versions 0.6.
++    This readme refers to versions 0.7.
+     For details of changes, refer to the file Changes.
+ 
+ 
+
+Modified: cpan/trunk/lib/Teamspeak/Ban.pm
+===================================================================
+--- cpan/trunk/lib/Teamspeak/Ban.pm	2008-07-17 15:06:15 UTC (rev 41)
++++ cpan/trunk/lib/Teamspeak/Ban.pm	2008-10-13 00:53:23 UTC (rev 42)
+@@ -5,6 +5,6 @@
+ 
+ use strict;
+ use vars qw( $VERSION );
+-$VERSION = '0.6';
++$VERSION = '0.7';
+ 
+ 1;
+
+Modified: cpan/trunk/lib/Teamspeak/Channel.pm
+===================================================================
+--- cpan/trunk/lib/Teamspeak/Channel.pm	2008-07-17 15:06:15 UTC (rev 41)
++++ cpan/trunk/lib/Teamspeak/Channel.pm	2008-10-13 00:53:23 UTC (rev 42)
+@@ -5,6 +5,6 @@
+ 
+ use strict;
+ use vars qw( $VERSION );
+-$VERSION = '0.6';
++$VERSION = '0.7';
+ 
+ 1;
+
+Modified: cpan/trunk/lib/Teamspeak/Player.pm
+===================================================================
+--- cpan/trunk/lib/Teamspeak/Player.pm	2008-07-17 15:06:15 UTC (rev 41)
++++ cpan/trunk/lib/Teamspeak/Player.pm	2008-10-13 00:53:23 UTC (rev 42)
+@@ -5,7 +5,7 @@
+ 
+ use strict;
+ use vars qw( $VERSION );
+-$VERSION = '0.6';
++$VERSION = '0.7';
+ 
+ sub new {
+     my ( $self, %args ) = @_;
+
+Modified: cpan/trunk/lib/Teamspeak/Privileges.pm
+===================================================================
+--- cpan/trunk/lib/Teamspeak/Privileges.pm	2008-07-17 15:06:15 UTC (rev 41)
++++ cpan/trunk/lib/Teamspeak/Privileges.pm	2008-10-13 00:53:23 UTC (rev 42)
+@@ -5,6 +5,6 @@
+ 
+ use strict;
+ use vars qw( $VERSION );
+-$VERSION = '0.6';
++$VERSION = '0.7';
+ 
+ 1;
+
+Modified: cpan/trunk/lib/Teamspeak/SQL/Channel.pm
+===================================================================
+--- cpan/trunk/lib/Teamspeak/SQL/Channel.pm	2008-07-17 15:06:15 UTC (rev 41)
++++ cpan/trunk/lib/Teamspeak/SQL/Channel.pm	2008-10-13 00:53:23 UTC (rev 42)
+@@ -2,8 +2,10 @@
+ # $URL$
+ 
+ package Teamspeak::SQL::Channel;
+-my @ISA = qw( Teamspeak::Channel );
+ 
++use strict;
++use base 'Teamspeak::Channel';
++
+ my @_parameter = (
+     's_channel_description',  'dt_channel_created',
+     's_channel_name',         'i_channel_parent_id',
+@@ -37,3 +39,7 @@
+     my $self = shift;
+     return map { $_ =~ m/.+_channel_(.*)/; $1 } @_parameter;
+ }    # Teamspeak::Channel::parameter
++
++1;
++
++__END__
+
+Modified: cpan/trunk/lib/Teamspeak/SQL.pm
+===================================================================
+--- cpan/trunk/lib/Teamspeak/SQL.pm	2008-07-17 15:06:15 UTC (rev 41)
++++ cpan/trunk/lib/Teamspeak/SQL.pm	2008-10-13 00:53:23 UTC (rev 42)
+@@ -8,7 +8,7 @@
+ use DBI;
+ use Teamspeak::SQL::Channel;
+ use vars qw( $VERSION );
+-$VERSION = '0.6';
++$VERSION = '0.7';
+ my @ISA = qw( Teamspeak );
+ 
+ sub connect {
+
+Modified: cpan/trunk/lib/Teamspeak/Telnet/Channel.pm
+===================================================================
+--- cpan/trunk/lib/Teamspeak/Telnet/Channel.pm	2008-07-17 15:06:15 UTC (rev 41)
++++ cpan/trunk/lib/Teamspeak/Telnet/Channel.pm	2008-10-13 00:53:23 UTC (rev 42)
+@@ -2,15 +2,17 @@
+ # $URL$
+ 
+ package Teamspeak::Telnet::Channel;
+-my @ISA = qw( Teamspeak::Channel );
+ 
++use strict;
++use base 'Teamspeak::Channel';
++
+ my @_parameters = (
+     'id',    'name',     'topic',    'parent',
+     'flags', 'maxusers', 'password', 'order'
+ );
+ 
+ sub parameter {
+-    return @_telnet_ch_parameters;
++    return @_parameters;
+ }
+ 
+ sub new {
+
+Modified: cpan/trunk/lib/Teamspeak/Telnet.pm
+===================================================================
+--- cpan/trunk/lib/Teamspeak/Telnet.pm	2008-07-17 15:06:15 UTC (rev 41)
++++ cpan/trunk/lib/Teamspeak/Telnet.pm	2008-10-13 00:53:23 UTC (rev 42)
+@@ -8,7 +8,7 @@
+ use Carp;
+ use vars qw( $VERSION );
+ use Teamspeak::Telnet::Channel;
+-$VERSION = '0.6';
++$VERSION = '0.7';
+ my @ISA = qw( Teamspeak );
+ 
+ ## Module import.
+@@ -22,12 +22,12 @@
+     );
+     if ( !$t ) {
+         $self-&gt;my_die(&quot;can't create Telnet-Instance&quot;);
+-        return undef;
++        return;
+     }
+     $t-&gt;open( Host =&gt; $self-&gt;{host}, Port =&gt; $self-&gt;{port} )
+         or do {
+         $self-&gt;my_die(&quot;Telnet open $t-&gt;errmsg&quot;);
+-        return undef;
++        return;
+         };
+     $t-&gt;waitfor('/\[TS\]$/');
+     $self-&gt;{sock} = $t;
+@@ -72,7 +72,11 @@
+ sub login {
+     my ( $self, $login, $pwd ) = @_;
+     $self-&gt;{sock}-&gt;print(&quot;login $login $pwd&quot;);
+-    $self-&gt;{sock}-&gt;waitfor('/OK$/');
++    my ( $answer, $match ) = $self-&gt;{sock}-&gt;waitfor('/(OK|ERROR,.*)$/');
++    if ( $match ne 'OK' ) {
++        $self-&gt;my_die( 'login failed', $answer );
++        return;
++    }
+     $self-&gt;{login} = $login;
+     return 1;
+ }    # login
+@@ -83,7 +87,7 @@
+     my @result = ();
+     if ( !$self-&gt;logged_in ) {
+         $self-&gt;my_die(&quot;command needs login&quot;);
+-        return undef;
++        return;
+     }
+     $self-&gt;{sock}-&gt;print('dbuserlist');
+     my ( $answer, $match ) = $self-&gt;{sock}-&gt;waitfor('/(OK|ERROR,.*)$/');
+@@ -114,7 +118,7 @@
+     my ( $answer, $match ) = $self-&gt;{sock}-&gt;waitfor('/(OK|ERROR*)$/');
+     if ( !defined $match or $match =~ /ERROR/ ) {
+         $self-&gt;my_die($match);
+-        return undef;
++        return;
+     }
+     return int($answer);
+ }    # dbuserid
+@@ -144,7 +148,7 @@
+     my ( $answer, $match ) = $self-&gt;{sock}-&gt;waitfor('/(OK|ERROR.*)$/');
+     if ( !defined $match or $match =~ /ERROR/ ) {
+         $self-&gt;my_die($match);
+-        return undef;
++        return;
+     }
+     my @lines = split( /\n/, $answer );
+     shift @lines;    # First Line is empty
+@@ -173,7 +177,7 @@
+     my ( $answer, $match ) = $self-&gt;{sock}-&gt;waitfor('/(OK|ERROR.*)$/');
+     if ( !defined $match or $match =~ /ERROR/ ) {
+         $self-&gt;my_die($match);
+-        return undef;
++        return;
+     }
+     my @lines = split( /\n/, $answer );
+     shift @lines;    # First Line is empty
+@@ -196,7 +200,7 @@
+     my ( $answer, $match ) = $self-&gt;{sock}-&gt;waitfor('/(OK|ERROR.*)$/');
+     if ( !defined $match or $match =~ /ERROR/ ) {
+         $self-&gt;my_die($match);
+-        return undef;
++        return;
+     }
+     my @lines = split( /\n/, $answer );
+     shift @lines;    # First Line is empty
+@@ -253,7 +257,7 @@
+             return @result;
+         }
+         else {
+-            return undef;
++            return;
+         }
+     }
+     else {
+@@ -261,7 +265,7 @@
+         my ( $answer, $match ) = $self-&gt;{sock}-&gt;waitfor('/(OK|ERROR.*)$/');
+         if ( !defined $match or $match =~ /ERROR/ ) {
+             $self-&gt;my_die($match);
+-            return undef;
++            return;
+         }
+         my @lines = split( /\n/, $answer );
+         shift @lines;    # First Line is empty
+@@ -289,7 +293,7 @@
+     my ( $answer, $match ) = $self-&gt;{sock}-&gt;waitfor('/(OK|ERROR.*)$/');
+     if ( !defined $match or $match =~ /ERROR/ ) {
+         $self-&gt;my_die($match);
+-        return undef;
++        return;
+     }
+     return 1;
+ }    # banadd
+@@ -303,7 +307,7 @@
+     my ( $answer, $match ) = $self-&gt;{sock}-&gt;waitfor('/(OK|ERROR.*)$/');
+     if ( !defined $match or $match =~ /ERROR/ ) {
+         $self-&gt;my_die($match);
+-        return undef;
++        return;
+     }
+     return 1;
+ }    # banplayer
+@@ -316,7 +320,7 @@
+     my ( $answer, $match ) = $self-&gt;{sock}-&gt;waitfor('/(OK|ERROR.*)$/');
+     if ( !defined $match or $match =~ /ERROR/ ) {
+         $self-&gt;my_die($match);
+-        return undef;
++        return;
+     }
+     return 1;
+ }    # kick
+@@ -333,7 +337,7 @@
+     my ( $answer, $match ) = $self-&gt;{sock}-&gt;waitfor('/(OK|ERROR.*)$/');
+     if ( !defined $match or $match =~ /ERROR/ ) {
+         $self-&gt;my_die($match);
+-        return undef;
++        return;
+     }
+     return 1;
+ }    # serverset
+@@ -347,7 +351,7 @@
+     my ( $answer, $match ) = $self-&gt;{sock}-&gt;waitfor('/(OK|ERROR.*)$/');
+     if ( !defined $match or $match =~ /ERROR/ ) {
+         $self-&gt;my_die($match);
+-        return undef;
++        return;
+     }
+     $answer =~ /=([\d\.]+)%/;
+     return $1;
+@@ -362,7 +366,7 @@
+     my ( $answer, $match ) = $self-&gt;{sock}-&gt;waitfor('/(OK|ERROR.*)$/');
+     if ( !defined $match or $match =~ /ERROR/ ) {
+         $self-&gt;my_die($match);
+-        return undef;
++        return;
+     }
+     return 1;
+ }    # mptc
+@@ -375,7 +379,7 @@
+     my ( $answer, $match ) = $self-&gt;{sock}-&gt;waitfor('/(OK|ERROR.*)$/');
+     if ( !defined $match or $match =~ /ERROR/ ) {
+         $self-&gt;my_die($match);
+-        return undef;
++        return;
+     }
+     return 1;
+ }    # removeclient
+@@ -388,7 +392,7 @@
+     my ( $answer, $match ) = $self-&gt;{sock}-&gt;waitfor('/(OK|ERROR.*)$/');
+     if ( !defined $match or $match =~ /ERROR/ ) {
+         $self-&gt;my_die($match);
+-        return undef;
++        return;
+     }
+     return 1;
+ }    # msg
+@@ -402,7 +406,7 @@
+     my ( $answer, $match ) = $self-&gt;{sock}-&gt;waitfor('/(OK|ERROR.*)$/');
+     if ( !defined $match or $match =~ /ERROR/ ) {
+         $self-&gt;my_die($match);
+-        return undef;
++        return;
+     }
+     return 1;
+ }    # msgu
+@@ -434,7 +438,7 @@
+         return keys( %{ $_[0]-&gt;{channel} } );
+     }
+     else {
+-        return undef;
++        return;
+     }
+ }    # channels
+ 
+
+Modified: cpan/trunk/lib/Teamspeak/Web.pm
+===================================================================
+--- cpan/trunk/lib/Teamspeak/Web.pm	2008-07-17 15:06:15 UTC (rev 41)
++++ cpan/trunk/lib/Teamspeak/Web.pm	2008-10-13 00:53:23 UTC (rev 42)
+@@ -8,7 +8,7 @@
+ use Carp;
+ use WWW::Mechanize;
+ use vars qw( $VERSION );
+-$VERSION = '0.6';
++$VERSION = '0.7';
+ 
+ sub _slogin {
+     my ( $self, $login, $password ) = @_;
+
+Modified: cpan/trunk/lib/Teamspeak.pm
+===================================================================
+--- cpan/trunk/lib/Teamspeak.pm	2008-07-17 15:06:15 UTC (rev 41)
++++ cpan/trunk/lib/Teamspeak.pm	2008-10-13 00:53:23 UTC (rev 42)
+@@ -2,17 +2,19 @@
+ # $URL$
+ 
+ package Teamspeak;
+-use Teamspeak::Channel;
+-use Teamspeak::Player;
+-
+ use 5.004;
+ use strict;
++use warnings;
+ use Net::Telnet;
+ use Carp;
+ use vars qw( $VERSION );
+ 
+-$VERSION = '0.6';
++use Teamspeak::Channel;
++use Teamspeak::Player;
+ 
++$VERSION = '0.7';
++
++
+ sub new {
+     my ( $class, %arg ) = @_;
+     if ( $arg{type} eq 'telnet' ) {
+@@ -54,12 +56,12 @@
+ 
+ =head1 VERSION
+ 
+-This document refers to version 0.6 of Teamspeak.
++This document refers to version 0.7 of Teamspeak.
+ 
+ =head1 SYNOPSIS
+ 
+  use Teamspeak;
+- my $tsh = Teamspeak-&gt;new( 
++ my $tsh = Teamspeak-&gt;new(
+      timeout =&gt; &lt;sec&gt;,
+      port =&gt; &lt;port_number&gt;,
+      host =&gt; &lt;ip_or_hostname&gt;
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	
+	
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#9">[ date ]</a>
+              <a href="thread.html#9">[ thread ]</a>
+              <a href="subject.html#9">[ subject ]</a>
+              <a href="author.html#9">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/cpan-teamspeak-svn">More information about the Cpan-teamspeak-svn
+mailing list</a><br>
+</body></html>
